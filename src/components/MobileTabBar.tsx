@@ -1,4 +1,4 @@
-import { BarChart3, Home, Mail, Menu, Newspaper } from 'lucide-react'
+import { BarChart3, Home, Info, Mail, Newspaper } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '../lib/utils'
@@ -16,6 +16,12 @@ const tabs: Tab[] = [
     to: '/',
     icon: Home,
     isActive: (pathname, hash) => pathname === '/' && hash !== '#expertises',
+  },
+  {
+    label: 'À propos',
+    to: '/a-propos',
+    icon: Info,
+    isActive: (pathname) => pathname.startsWith('/a-propos'),
   },
   {
     label: 'Expertises',
@@ -37,12 +43,7 @@ const tabs: Tab[] = [
   },
 ]
 
-type MobileTabBarProps = {
-  onMore: () => void
-  menuOpen: boolean
-}
-
-export function MobileTabBar({ onMore, menuOpen }: MobileTabBarProps) {
+export function MobileTabBar() {
   const { pathname, hash } = useLocation()
 
   return (
@@ -77,19 +78,6 @@ export function MobileTabBar({ onMore, menuOpen }: MobileTabBarProps) {
             </li>
           )
         })}
-
-        <li>
-          <button
-            type="button"
-            onClick={onMore}
-            aria-label="Ouvrir le menu"
-            aria-expanded={menuOpen}
-            className="flex min-h-[3.75rem] w-full flex-col items-center justify-center gap-1 px-1 pt-2 pb-1 text-[0.62rem] font-medium text-sand-100/60 transition-colors active:text-sand-100"
-          >
-            <Menu className="size-[1.15rem]" strokeWidth={1.7} />
-            <span>Menu</span>
-          </button>
-        </li>
       </ul>
     </nav>
   )

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, Download, MapPin, Phone, X } from 'lucide-react'
+import { ArrowUpRight, Download, MapPin, Menu, Phone, X } from 'lucide-react'
 import { navLinks, site } from '../data/site'
 import { useInstallPrompt } from '../hooks/useInstallPrompt'
 import { cn } from '../lib/utils'
@@ -114,6 +114,15 @@ export function Navbar() {
                 Demander un devis
               </Button>
             </div>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Ouvrir le menu"
+              aria-expanded={open}
+              className="grid size-11 place-items-center rounded-full border border-ink/15 text-ink transition hover:border-ink/40 lg:hidden"
+            >
+              <Menu className="size-5" strokeWidth={1.7} />
+            </button>
           </div>
         </div>
       </header>
@@ -207,7 +216,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      <MobileTabBar onMore={() => setOpen(true)} menuOpen={open} />
+      <MobileTabBar />
     </>
   )
 }

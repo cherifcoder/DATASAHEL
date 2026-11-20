@@ -26,3 +26,12 @@ createRoot(document.getElementById('root')!).render(
     </BrowserRouter>
   </StrictMode>,
 )
+
+// PWA : activation du cache applicatif uniquement en production.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
+      // Le site reste fonctionnel même si l'enregistrement échoue.
+    })
+  })
+}

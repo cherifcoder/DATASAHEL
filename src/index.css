@@ -33,12 +33,26 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-sand-50 text-ink font-sans antialiased;
     font-feature-settings: 'ss01' on, 'cv01' on;
     overflow-x: hidden;
+    overscroll-behavior-y: contain;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* La barre d'onglets mobile est fixe : on réserve sa hauteur en bas de page. */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    }
   }
 
   ::selection {
@@ -78,6 +92,10 @@
       transition-duration: 0.01ms !important;
     }
   }
+}
+
+@utility app-header {
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 @utility shell {

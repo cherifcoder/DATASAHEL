@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, MapPin, Menu, Phone, X } from 'lucide-react'
+import { ArrowUpRight, Download, MapPin, Phone, X } from 'lucide-react'
 import { navLinks, site } from '../data/site'
+import { useInstallPrompt } from '../hooks/useInstallPrompt'
 import { cn } from '../lib/utils'
 import { Logo } from './Logo'
 import { Button } from './Button'
+import { MobileTabBar } from './MobileTabBar'
 import { SocialLinks } from './SocialLinks'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const { canInstall, install } = useInstallPrompt()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -69,7 +72,7 @@ export function Navbar() {
 
       <header
         className={cn(
-          'sticky top-0 z-50 transition-all duration-500',
+          'app-header sticky top-0 z-50 transition-all duration-500',
           scrolled
             ? 'border-b border-ink/8 bg-sand-50/90 shadow-[0_10px_40px_-24px_rgba(12,42,69,0.35)] backdrop-blur-xl'
             : 'border-b border-transparent bg-sand-50/60 backdrop-blur-sm',
@@ -110,15 +113,6 @@ export function Navbar() {
                 Demander un devis
               </Button>
             </div>
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-label="Ouvrir le menu"
-              aria-expanded={open}
-              className="grid size-11 place-items-center rounded-full border border-ink/15 text-ink transition hover:border-ink/40 lg:hidden"
-            >
-              <Menu className="size-5" strokeWidth={1.7} />
-            </button>
           </div>
         </div>
       </header>
@@ -136,7 +130,7 @@ export function Navbar() {
             aria-modal="true"
             aria-label="Menu"
           >
-            <div className="shell flex h-[4.6rem] shrink-0 items-center justify-between border-b border-ink/10">
+            <div className="app-header shell flex h-[4.6rem] shrink-0 items-center justify-between border-b border-ink/10">
               <Logo />
               <button
                 type="button"
@@ -182,6 +176,16 @@ export function Navbar() {
                 <Button to="/contact" size="lg" className="w-full">
                   Demander un devis
                 </Button>
+                {canInstall && (
+                  <button
+                    type="button"
+                    onClick={install}
+                    className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy-900 px-5 py-3 text-sm font-semibold text-sand-50 transition active:scale-[0.99]"
+                  >
+                    <Download className="size-4" strokeWidth={1.8} />
+                    Installer l’application
+                  </button>
+                )}
                 <div className="flex items-center justify-between gap-4 rounded-2xl border border-ink/10 bg-sand-100/60 p-4">
                   <div className="text-sm">
                     <p className="font-mono text-[0.62rem] tracking-widest text-ink/70 uppercase">
@@ -201,6 +205,8 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <MobileTabBar onMore={() => setOpen(true)} menuOpen={open} />
     </>
   )
 }

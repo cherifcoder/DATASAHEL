@@ -1,0 +1,49 @@
+{
+  "id": "./",
+  "name": "DataSahel — Données, analyse et suivi-évaluation",
+  "short_name": "DataSahel",
+  "description": "Collecte, analyse, visualisation et valorisation des données au service du Sahel.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#FBF7EF",
+  "theme_color": "#0C2A45",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Explorer le blog",
+      "short_name": "Blog",
+      "url": "blog",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Nous contacter",
+      "short_name": "Contact",
+      "url": "contact",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

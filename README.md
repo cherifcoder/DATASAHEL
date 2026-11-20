@@ -5,6 +5,9 @@ Le parti pris graphique s’appuie sur le concept de la marque : **la donnée au
 Sable, terre cuite et bleu nuit, typographie éditoriale (Fraunces), motifs de grille et de motifs
 bogolan, visualisations de données dessinées sur mesure.
 
+> **Version 2.0** — PWA installable : navigation en barre d’onglets sur mobile, affichage plein écran,
+> zones de sécurité iOS/Android et cache hors-ligne.
+
 ## Stack
 
 - **React 19** + **TypeScript**
@@ -56,6 +59,20 @@ src/
 - **Motifs** : pointillés de grille, arcs concentriques (soleil sahélien), bande bogolan.
 - Accessibilité : contrastes WCAG AA vérifiés, navigation clavier, `prefers-reduced-motion`
   respecté, lien d’évitement et landmarks.
+
+## Version 2 — rendu mobile « application »
+
+- **PWA installable** : `public/manifest.webmanifest` (`display: standalone`, orientation portrait,
+  couleurs de la marque) et icônes 192/512 px générées depuis `logo.png`, dont une version
+  *maskable* pour les écrans découpés.
+- **Barre d’onglets fixe** sur moins de 1024 px : Accueil, Expertises, Blog, Contact et Menu.
+  Le menu garde le formulaire de contact, les réseaux sociaux et le bouton d’installation.
+- **Plein écran et zones de sécurité** : `viewport-fit=cover`, `env(safe-area-inset-*)` pour le haut
+  et le bas, hauteur réservée au bas de page pour ne rien masquer sous la barre d’onglets.
+- **Hors-ligne** : `public/sw.js` (cache du shell + des assets, réseau d’abord pour la navigation,
+  repli sur le cache). Enregistré uniquement en production dans `src/main.tsx`.
+- **Touch** : cibles tactiles ≥ 44 px, `touch-action: manipulation`, tap highlight désactivé,
+  `overscroll-behavior` contenu pour un rendu proche d’une application native.
 
 ## Formulaire de contact
 

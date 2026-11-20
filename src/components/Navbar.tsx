@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, Download, MapPin, Phone, X } from 'lucide-react'
 import { navLinks, site } from '../data/site'
@@ -35,8 +35,8 @@ export function Navbar() {
   }, [open])
 
   const isActive = (to: string) => {
-    if (to === '/') return location.pathname === '/'
-    if (to.startsWith('/#')) return false
+    if (to === '/') return location.pathname === '/' && location.hash !== '#expertises'
+    if (to.startsWith('/#')) return location.pathname === '/' && location.hash === to.slice(1)
     return location.pathname.startsWith(to)
   }
 
@@ -87,9 +87,10 @@ export function Navbar() {
             {navLinks.map((link) => {
               const active = isActive(link.to)
               return (
-                <NavLink
+                <Link
                   key={link.to}
                   to={link.to}
+                  aria-current={active ? 'page' : undefined}
                   className={cn(
                     'group relative px-3.5 py-2 text-[0.86rem] font-medium transition-colors',
                     active ? 'text-clay-600' : 'text-ink/75 hover:text-ink',
@@ -102,7 +103,7 @@ export function Navbar() {
                       active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                     )}
                   />
-                </NavLink>
+                </Link>
               )
             })}
           </nav>

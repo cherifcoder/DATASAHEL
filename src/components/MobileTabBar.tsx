@@ -15,7 +15,7 @@ const tabs: Tab[] = [
     label: 'Accueil',
     to: '/',
     icon: Home,
-    isActive: (pathname) => pathname === '/',
+    isActive: (pathname, hash) => pathname === '/' && hash !== '#expertises',
   },
   {
     label: 'Expertises',
